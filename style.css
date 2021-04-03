@@ -1,0 +1,33 @@
+body {
+  background-image: url(background.png);
+  background-repeat: repeat;
+  background-position: 50% 0;
+}
+
+h1 {
+  text-align: center;
+  font-family: Courier;
+  color: whitesmoke;
+  margin: 10px;
+}
+
+.io {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+}
+
+.outputarea > textarea {
+  width: 100%;
+  resize: none;
+  background: black;
+  color: gainsboro;
+}
+
+.inputarea > input {
+  width: 100%;
+  background: black;
+  color: gainsboro;
+  font-family: monospace;
+}
