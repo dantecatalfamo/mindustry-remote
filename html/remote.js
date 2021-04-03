@@ -1,3 +1,5 @@
+const WEBSOCKET = 'ws://localhost:8990';
+
 const output = document.getElementById("output");
 const input = document.getElementById("input");
 
@@ -15,7 +17,7 @@ function send() {
   input.value = "";
 }
 
-const ws = new WebSocket('ws://localhost:8990');
+const ws = new WebSocket(WEBSOCKET);
 ws.onopen = function() {
   log('** Connected to server **');
 };
