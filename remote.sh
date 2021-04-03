@@ -2,5 +2,6 @@
 
 MINDUSTRY_PORT=6859
 LISTEN_PORT=8990
+LISTEN_ADDRESS=127.0.0.1
 
-websocketd -maxforks=1 -port $LISTEN_PORT -- nc localhost $MINDUSTRY_PORT
+websocketd -maxforks=1 -port $LISTEN_PORT -address=$LISTEN_ADDRESS -- nc localhost $MINDUSTRY_PORT
