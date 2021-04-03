@@ -1,5 +1,5 @@
 * Mindustry Remote
-  Control the Mindustry console from your web browser.
+  Control the Mindustry server console from your web browser.
 
   [[file:screenshot.jpg]]
 ** Requirements
