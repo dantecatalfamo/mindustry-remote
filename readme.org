@@ -1,0 +1,50 @@
+* Mindustry Remote
+  Control the Mindustry console from your web browser.
+** Requirements
+   - [[https://anuke.itch.io/mindustry][=Mindustry Server=]]
+   - [[https://github.com/joewalnes/websocketd][=websocketd=]]
+   - =netcat=
+   - =nginx= (optional)
+** Variables
+*** =remote.sh=
+    - =MINDUSTRY_PORT= The port that the Mindustry TCP server is listening on
+    - =LISTEN_PORT= The port that the websocket server will be served
+      on (default =8990=)
+    - =LISTEN_ADDRESS= The address that the websocket server will be
+      bound to (default =127.0.0.1=)
+*** =html/remote.js=
+    - =WEBSOCKET= The address of the websocket server
+** Setup
+   Once the Mindustry server is launched, enable =socketInput= with
+   the following console command.
+
+   #+begin_src
+   config socketInput true
+   #+end_src
+
+   Then launch the websocket server using =remote.sh=.
+
+   #+begin_src shell
+   ./remote.sh
+   #+end_src
+
+   The script should connect to the Mindustry server on the default
+   port, but if yours is configured differently, it should be easy to
+   change using the variables at the top of the file.
+
+   The websocket server will be listening on port =8990= on
+   =localhost= by default.
+
+   The assets in the =html= folder should be copied to a place where
+   they can be accessed through a web server like =ngix=, and the
+   variable at the top of =remote.js= should be modified to reflect
+   the true location of the websocket server.
+
+   At this point, the web console should be setup behind a reverse
+   proxy like =nginx= using something like basic auth to keep
+   strangers out.
+** Limitations
+   Because of the way the console server works in Mindustry, only one
+   person can be connected to the web console at a time. If more than
+   one person tries to connect at a time, the connection to the
+   websocket server will fail.
