@@ -2,6 +2,7 @@ const WEBSOCKET = 'ws://localhost:8990';
 
 const output = document.getElementById("output");
 const input = document.getElementById("input");
+let ws;
 
 function log(msg) {
   output.textContent +=
@@ -18,7 +19,7 @@ function send() {
 }
 
 function wsInit() {
-  const ws = new WebSocket(WEBSOCKET);
+  ws = new WebSocket(WEBSOCKET);
   ws.onopen = function() {
     log('** Connected to server **');
   };
@@ -39,3 +40,5 @@ function wsInit() {
     }
   });
 }
+
+wsInit();
