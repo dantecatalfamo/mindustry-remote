@@ -2,7 +2,6 @@ const WEBSOCKET = 'ws://localhost:8990';
 
 const output = document.getElementById("output");
 const input = document.getElementById("input");
-let ws;
 
 function log(msg) {
   output.textContent +=
@@ -18,27 +17,24 @@ function send() {
   input.value = "";
 }
 
-function wsInit() {
-  ws = new WebSocket(WEBSOCKET);
-  ws.onopen = function() {
-    log('** Connected to server **');
-  };
-  ws.onclose = function() {
-    log('** Disconnected, reconnecting... **');
-    setTimeout(wsInit, 1000);
-  };
-  ws.onerror = function(event) {
-    log(`** Error connecting to server. Is someone else using the console? **`);
-  };
-  ws.onmessage = function(event) {
-    log(event.data);
-  };
+const ws = new WebSocket(WEBSOCKET);
+ws.onopen = function() {
+  log('** Connected to server **');
+};
+ws.onclose = function() {
+  log('** Disconnected **');
+};
+ws.onerror = function(event) {
+  log(`** Error connecting to server. Is someone else using the console? **`);
+};
+ws.onmessage = function(event) {
+  log(event.data);
+};
 
-  input.addEventListener('keyup', (event) => {
-    if (event.keyCode === 13) {
-      send();
-    }
-  });
-}
+input.addEventListener('keyup', (event) => {
+  if (event.keyCode === 13) {
+    send();
+  }
+});
 
-wsInit();
+console.log("Hello!");
