@@ -52,6 +52,14 @@
    person can be connected to the web console at a time. If more than
    one person tries to connect at a time, the connection to the
    websocket server will fail.
+
+   Depending on the configuration of your web server, the websocket
+   may timeout and disconnect after a certain period of inactivity.
+   In the case of =nginx=, this can be changed in the configuration
+   file. I don't necessarily see this as a bad thing, as it stops you
+   from accidentally leaving a browser tab open on a machine and
+   walking away, locking anyone else out of the console.
+
 ** Example nginx configuration
    Here's an example configuration file for =nginx=. The address of
    the example site is =example.com=, with the TLS certificates being
