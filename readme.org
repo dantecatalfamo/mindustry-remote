@@ -52,3 +52,60 @@
    person can be connected to the web console at a time. If more than
    one person tries to connect at a time, the connection to the
    websocket server will fail.
+** Example nginx configuration
+   Here's an example configuration file for =nginx=. The address of
+   the example site is =example.com=, with the TLS certificates being
+   managed through [[https://letsencrypt.org/][Let's Encrypt]]. In this example the files from the
+   =html= folder of this project have been copied over into
+   =/var/www/html/mindustry/=.
+
+   The =remote.js= file would be edited to have the =WEBSOCKET=
+   variable adjusted to the following.
+
+   #+begin_src js
+   const WEBSOCKET = 'wss://example.com/mindustry/ws';
+   #+end_src
+
+   The =nginx= config file is as follows.
+
+   #+begin_src conf
+   server {
+       listen 443 ssl;
+       ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+       ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+       include /etc/letsencrypt/options-ssl-nginx.conf;
+       ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+       server_name example.com;
+
+       root /var/www/html;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+
+       location /mindustry {
+           auth_basic "Mindustry Remote";
+           auth_basic_user_file /etc/nginx/htpasswd_mindustry;
+       }
+
+       location /mindustry/ws {
+           proxy_pass http://localhost:8990;
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection "Upgrade";
+           proxy_set_header Host $host;
+       }
+   }
+
+   server {
+       listen 80;
+
+       server_name example.com;
+
+       location / {
+           return 301 https://$host$request_uri;
+       }
+   }
+   #+end_src
