@@ -9,11 +9,13 @@
    - =nginx= (optional)
 ** Variables
 *** =remote.sh=
+    - =MINDUSTRY_ADDRESS= The address that the Mindustry TCP server is
+      listening on
     - =MINDUSTRY_PORT= The port that the Mindustry TCP server is listening on
-    - =LISTEN_PORT= The port that the websocket server will be served
-      on (default =8990=)
     - =LISTEN_ADDRESS= The address that the websocket server will be
       bound to (default =127.0.0.1=)
+    - =LISTEN_PORT= The port that the websocket server will be served
+      on (default =8990=)
 *** =html/remote.js=
     - =WEBSOCKET= The address of the websocket server
 ** Setup
