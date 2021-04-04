@@ -58,7 +58,8 @@
    In the case of =nginx=, this can be changed in the configuration
    file. I don't necessarily see this as a bad thing, as it stops you
    from accidentally leaving a browser tab open on a machine and
-   walking away, locking anyone else out of the console.
+   walking away, locking anyone else out of the console. In case it
+   disconnects, refreshing the page should fix the problem.
 
 ** Example nginx configuration
    Here's an example configuration file for =nginx=. The address of
