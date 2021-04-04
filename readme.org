@@ -40,7 +40,7 @@
    =localhost= by default.
 
    The assets in the =html= folder should be copied to a place where
-   they can be accessed through a web server like =ngix=, and the
+   they can be accessed through a web server like =nginx=, and the
    variable at the top of =remote.js= should be modified to reflect
    the true location of the websocket server.
 
